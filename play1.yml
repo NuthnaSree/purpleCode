@@ -1,14 +1,14 @@
 ---
 - name: This is my first play creating user and password
-  hosts: friends
+  hosts: 192.168.35.100
   remote_user: ansible
   become: true
   tasks:
   - name: create a user in friends managed hosts
     user:
-     name: lisa
+     name: lisa1
      comment: created by nuthna
-     uid: 7798
+     #uid: 7798
      password: $6$asdfghjkl$qKjfssH6qh1tbJ3H6E5/AO2MzPex41qlfOqHDinJIdunkTHOqA7Ukg3IalxBllUzN9tLMrYPaMOheE8XI8YaG0
      state: present
      # to delete user along home dir
