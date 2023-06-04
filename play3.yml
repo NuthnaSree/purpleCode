@@ -1,0 +1,12 @@
+---
+- name: play to create a file
+  hosts: [192.168.36.200 192.168.28.200]
+  become: true
+  remote_user: ansible
+  tasks: 
+  - name: create a file nuthna.txt
+    file:
+     path: /home/ansible/nuthna.txt
+     state: touch
+     mode: 0755
+...

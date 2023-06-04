@@ -1,0 +1,42 @@
+---
+- name: Copying repo file, installing http, coping index.html, adding services to firewalld and starting the httpd service
+  hosts: all
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks: 
+  # copy the repo file from local server to remote managed nodes.
+  - name: copy repo file to remote server
+    copy: 
+     src: /home/ansible/nuthna.repo
+     dest: /etc/yum.repos.d/nuthna.repo
+     mode: 0644
+     owner: root
+     group: root
+  # install httpd package- name: Install Apache Webserver
+  - name: Install apache webserver
+    yum:
+     name: httpd
+     state: installed
+  # copy index.html from local server to remote servers
+  - name: copy the index file
+    copy: 
+     src: /home/ansible/index.html
+     dest: /var/www/html/index.html
+     mode: 0644
+     owner: root
+     group: root
+  # Add http service to firewalls and enabled it immediately  
+  - name: add http port to firewall
+    firewalld:
+     service: http
+     state: enabled
+     permanent: yes
+     immediate: yes
+  # start the httpd service
+  - name: start httpd webserver
+    service:
+     name: httpd
+     state: started
+     enabled: yes     
+...

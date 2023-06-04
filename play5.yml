@@ -1,0 +1,11 @@
+---
+- name: 
+  hosts: [192.168.15.200, 192.168.35.100]
+  remote_user: ansible
+  become: true
+  tasks:
+  - name: installing the samba in remote server
+    yum:
+     name: samba
+     state: present
+...
